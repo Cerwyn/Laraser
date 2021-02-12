@@ -15,6 +15,11 @@ class Table
      */
     public $name;
 
+    /**
+     * Initiate with a model Class or table name
+     * 
+     * @param string $table
+     */
     public function __construct(string $table)
     {
         if (Schema::hasTable($table)) {
@@ -25,18 +30,33 @@ class Table
         }
     }
 
-    public function hasColumn($column = 'deleted_at')
+    /**
+     * Check if the table has a column
+     * 
+     * @param string $column
+     * @return bool $hasColumn
+     */
+    public function hasColumn($column = 'deleted_at'): bool
     {
         $schema = Schema::getColumnListing($this->name);
         return in_array($column, $schema);
     }
 
+    /**
+     * Remove the deleted data
+     * that has been x days old
+     * 
+     * @param int $removesIn
+     */
     public function delete(int $removesIn)
     {
         $date = now()->addDays($removesIn * -1);
         return DB::table($this->name)->where('deleted_at', '>=', $date)->delete();
     }
 
+    /**
+     * Log the data
+     */
     public function logUnusedData($date)
     {
         /**
@@ -46,6 +66,9 @@ class Table
         return DB::table($this->name)->where('deleted_at', '!=', null)->get();
     }
 
+    /**
+     * Backup the data
+     */
     public function backupUnusedData()
     {
         /**
@@ -55,16 +78,25 @@ class Table
     }
 
     /**
-     * If the table name is exists
+     * Check if the object is valid,
+     * identified whether the object
+     * has a table or not
      * 
      * @return bool
      */
-    public function isValid()
+    public function isValid(): bool
     {
         return $this->name != null;
     }
 
-    protected function getTableName($modelPath): ?string
+    /**
+     * Get the table name
+     * based on model class
+     * 
+     * @param string $modelPath
+     * @return null|string $tableName
+     */
+    protected function getTableName(string $modelPath): ?string
     {
         try {
             $model = new $modelPath();
