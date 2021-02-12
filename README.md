@@ -1,11 +1,11 @@
-# Very short description of the package
+# Laraser
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/cerwyn/laraser.svg?style=flat-square)](https://packagist.org/packages/cerwyn/laraser)
 [![Build Status](https://img.shields.io/travis/cerwyn/laraser/master.svg?style=flat-square)](https://travis-ci.org/cerwyn/laraser)
 [![Quality Score](https://img.shields.io/scrutinizer/g/cerwyn/laraser.svg?style=flat-square)](https://scrutinizer-ci.com/g/cerwyn/laraser)
 [![Total Downloads](https://img.shields.io/packagist/dt/cerwyn/laraser.svg?style=flat-square)](https://packagist.org/packages/cerwyn/laraser)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+Simply remove your soft deleted data
 
 ## Installation
 
@@ -16,16 +16,11 @@ composer require cerwyn/laraser
 ```
 
 ## Usage
-
+Publish the configuration
 ``` php
-// Usage description here
+php artisan vendor:publish --tag=laraser
 ```
-
-### Testing
-
-``` bash
-composer test
-```
+Then ```php artisan laraser:remove``` to start removing the soft deleted data
 
 ### Changelog
 
@@ -39,15 +34,6 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 If you discover any security related issues, please email cerwyneliata.c@gmail.com instead of using the issue tracker.
 
-## Credits
-
-- [Cerwyn](https://github.com/cerwyn)
-- [All Contributors](../../contributors)
-
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
