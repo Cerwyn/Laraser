@@ -25,9 +25,10 @@ class Laraser
             $tables = $this->config->models;
         }
 
+        // Push Table object to an array
         foreach ($tables as $table) {
             $table = new Table($table);
-            if ($table->hasColumn('deleted_at')) array_push($this->tables, $table);
+            if ($table->hasColumn('deleted_at') && $table->isValid()) array_push($this->tables, $table);
         }
 
         // TODO: Log/Backup if needed
