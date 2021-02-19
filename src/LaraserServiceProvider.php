@@ -16,6 +16,8 @@ class LaraserServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
 
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/laraser.php' => config_path('laraser.php'),
