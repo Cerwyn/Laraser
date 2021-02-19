@@ -2,27 +2,19 @@
 
 namespace Cerwyn\Laraser;
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use Throwable;
 
 class Laraser
 {
-    protected $config;
-    protected $tables;
-    public function __construct()
-    {
-        $this->config = new Configuration();
-    }
+    protected $tables = [];
 
-    // Build your next great package.
     public function handle()
     {
         // Initiate the tables that take effect
-        if ($this->config->allModels) {
+        if (config('laraser.only') == ['*']) {
             $tables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
         } else {
-            $tables = $this->config->models;
+            $tables = config('laraser.only');
         }
 
         // Push Table object to an array
@@ -31,12 +23,9 @@ class Laraser
             if ($table->hasColumn('deleted_at') && $table->isValid()) array_push($this->tables, $table);
         }
 
-        // TODO: Log/Backup if needed
-
-
         // Remove Unused Data
-        foreach($tables as $table) {
-            if ($table->isValid()) $table->delete($this->config->removesIn);
+        foreach ($this->tables as $table) {
+            $table->delete(config('laraser.remove_in'), config('laraser.log'));
         }
     }
 }

@@ -22,4 +22,13 @@ return [
         'App\Models\Client'
     ],
 
+    /**
+     * Enable the log
+     * 
+     * You can create another filesytems disks
+     * and set it in the storage key
+     */
+    'log' => true,
+    'storage' => 'local'
+
 ];
