@@ -10,7 +10,7 @@ return [
      * 
      * for tables that has soft deletes
      */
-    'remove_in' => 1, //days
+    'remove_in' => 30, //days
 
     /**
      * Models that will take effect
@@ -19,7 +19,6 @@ return [
      */
     'only' => [
         'App\Models\User',
-        'App\Models\Client'
     ],
 
     /**
