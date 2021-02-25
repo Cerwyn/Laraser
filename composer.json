@@ -17,10 +17,11 @@
     ],
     "require": {
         "php": "^7.1",
+        "doctrine/dbal": "^3.0",
         "illuminate/support": "^8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^4.0",
+        "orchestra/testbench": "^6.12",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {

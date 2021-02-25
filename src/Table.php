@@ -4,7 +4,9 @@ namespace Cerwyn\Laraser;
 
 use Throwable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 class Table
 {
@@ -48,33 +50,27 @@ class Table
      * 
      * @param int $removesIn
      */
-    public function delete(int $removesIn)
+    public function delete(int $removesIn, bool $log)
     {
         $date = now()->addDays($removesIn * -1);
-        return DB::table($this->name)->where('deleted_at', '>=', $date)->delete();
+        $data = DB::table($this->name)->whereDate('deleted_at', '<=', $date);
+
+        if ($log) {
+            $this->logData($data->get());
+        }
+
+        return $data->delete(); 
     }
 
     /**
      * Log the data
      */
-    public function logUnusedData($date)
+    public function logData($data)
     {
-        /**
-         * TODO: Log data (if needed).
-         * Use repository & interface
-         */
-        return DB::table($this->name)->where('deleted_at', '!=', null)->get();
-    }
-
-    /**
-     * Backup the data
-     */
-    public function backupUnusedData()
-    {
-        /**
-         * TODO: Backup data (if needed).
-         * Use repository & interface
-         */
+        $fileName = $this->name . '_' . now()->format('Y-m-d');
+        foreach($data as $item) {
+            Storage::disk(config('laraser.storage'))->append($fileName, json_encode($item));
+        }
     }
 
     /**
