@@ -32,8 +32,11 @@ php artisan vendor:publish --tag=laraser
 ];
 ```
 The ```remove_in``` is the old of your soft deleted data that want to be deleted.
+
 The ```only``` is the models that take effect. If you want to make all of your models take effect, then you should fill with ```['*']```
+
 The ```log``` is whether you want to log the data before being removed
+
 The ```storage``` is where you want your log to be stored. If you want to have another place to save your log data, you should add another disks inside ```config/filesystems.php```
 ```
 'disks' => [
