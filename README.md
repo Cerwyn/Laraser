@@ -1,8 +1,7 @@
 # Laraser
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/cerwyn/laraser.svg?style=flat-square)](https://packagist.org/packages/cerwyn/laraser)
-[![Build Status](https://img.shields.io/travis/cerwyn/laraser/master.svg?style=flat-square)](https://travis-ci.org/cerwyn/laraser)
-[![Quality Score](https://img.shields.io/scrutinizer/g/cerwyn/laraser.svg?style=flat-square)](https://scrutinizer-ci.com/g/cerwyn/laraser)
+<img src="https://circleci.com/gh/Cerwyn/Laraser/tree/master.svg?style=shield"/>
 [![Total Downloads](https://img.shields.io/packagist/dt/cerwyn/laraser.svg?style=flat-square)](https://packagist.org/packages/cerwyn/laraser)
 
 Simply Hard Delete your soft deleted data
